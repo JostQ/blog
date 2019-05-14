@@ -1,12 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
 
-<div class="example-wrapper">
-    <h1>Bienvenue sur mon blog !</h1>
-</div>
+    <div class="example-wrapper">
+        <h1>Bienvenue sur mon blog !</h1>
+    </div>
+
+    <a href="{{ path('blog_show', { 'slug': "javascript-vs-php" }) }}">
+        Testing show() method from BlogController with a real article s slug.
+    </a>
+    <br>
+    <a href="{{ path('blog_index') }}">
+        Testing index() method from BlogController to view all articles.
+    </a>
 {% endblock %}

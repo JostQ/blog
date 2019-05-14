@@ -36,6 +36,14 @@ class CategoryRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * @return Category[]
+     */
+    public function findByCategory($category) : Category
+    {
+
+    }
+
     /*
     public function findOneBySomeField($value): ?Category
     {

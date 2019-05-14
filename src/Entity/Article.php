@@ -30,7 +30,7 @@ class Article
      * @ORM\ManyToOne(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $caterogy;
+    private $category;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class Article
         return $this;
     }
 
-    public function getCaterogy(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->caterogy;
+        return $this->category;
     }
 
-    public function setCaterogy(?Category $caterogy): self
+    public function setCategory(?Category $category): self
     {
-        $this->caterogy = $caterogy;
+        $this->category = $category;
 
         return $this;
     }
