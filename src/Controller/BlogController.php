@@ -102,7 +102,7 @@ class BlogController extends AbstractController
 
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findBy(['category' => $category], ['id' => 'ASC'], 3);
+            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
 
         if (!$articles) {
             throw $this->createNotFoundException(
