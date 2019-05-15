@@ -67,6 +67,8 @@ class BlogController extends AbstractController
             );
         }
 
+        $category = $article->getCategory();
+
 
 
         return $this->render(
@@ -74,6 +76,7 @@ class BlogController extends AbstractController
             [
                 'article' => $article,
                 'slug' => $slug,
+                'category' => $category,
             ]
         );
     }
@@ -100,15 +103,18 @@ class BlogController extends AbstractController
             );
         }
 
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
+//
+//        $articles = $this->getDoctrine()
+//            ->getRepository(Article::class)
+//            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
+//
+//        if (!$articles) {
+//            throw $this->createNotFoundException(
+//                'No article with '.$categoryName.' name found'
+//            );
+//        }
 
-        if (!$articles) {
-            throw $this->createNotFoundException(
-                'No article with '.$categoryName.' name found'
-            );
-        }
+        $articles = $category->getArticles();
 
         foreach ($articles as $article) {
             $article->url = preg_replace('/ /', '-', strtolower($article->getTitle()));
@@ -118,5 +124,6 @@ class BlogController extends AbstractController
             'articles' => $articles,
             'category' => $category
         ]);
+
     }
 }
