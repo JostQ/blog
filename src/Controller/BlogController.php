@@ -82,28 +82,27 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param string|null $categoryName
-     * @Route("/category/{categoryName}", name="show_category")
+     * @param Category $category
+     * @Route("/category/{name}", name="show_category")
      * @return Response
      */
-    public function showByCategory(?string $categoryName) : Response
+    public function showByCategory(Category $category) : Response
     {
-        if (!$categoryName) {
+        if (!$category) {
             throw $this
                 ->createNotFoundException('No name has been sent to find an category in category\'s table.');
         }
-
-        $category = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findOneBy(['name' => mb_strtolower($categoryName)]);
-
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category with ' . $categoryName . ' name, found in category\'s table.'
-            );
-        }
-
 //
+//        $category = $this->getDoctrine()
+//            ->getRepository(Category::class)
+//            ->findOneBy(['name' => mb_strtolower($categoryName)]);
+//
+//        if (!$category) {
+//            throw $this->createNotFoundException(
+//                'No category with ' . $categoryName . ' name, found in category\'s table.'
+//            );
+//        }
+
 //        $articles = $this->getDoctrine()
 //            ->getRepository(Article::class)
 //            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
