@@ -31,7 +31,7 @@ class BlogController extends AbstractController
             $article->url = preg_replace('/ /', '-', strtolower($article->getTitle()));
         }
 
-        return $this->render('blog/index.html.twig', ['articles' => $articles]);
+        return $this->render('blog/add.html.twig', ['articles' => $articles]);
     }
 
 
@@ -102,7 +102,7 @@ class BlogController extends AbstractController
 //                'No category with ' . $categoryName . ' name, found in category\'s table.'
 //            );
 //        }
-
+//
 //        $articles = $this->getDoctrine()
 //            ->getRepository(Article::class)
 //            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
