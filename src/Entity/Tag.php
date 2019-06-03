@@ -25,6 +25,7 @@ class Tag
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Article", inversedBy="tags")
+     * @ORM\JoinTable(name="tag_article")
      */
     private $articles;
 
@@ -74,5 +75,10 @@ class Tag
         }
 
         return $this;
+    }
+
+    public function getSelector() : string
+    {
+        return $this->getId() . ' - ' . $this->getName();
     }
 }
