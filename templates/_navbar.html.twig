@@ -1,0 +1,41 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="{{ path('app_index') }}">Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('app_index') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="articleMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Article
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="articleMenu">
+                        <a class="dropdown-item" href="{{ path('article_index') }}">Articles list</a>
+                        <a class="dropdown-item" href="{{ path('article_new') }}">New article</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="tagMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tag
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="tagMenu">
+                        <a class="dropdown-item" href="{{ path('tag_index') }}">Tags list</a>
+                        <a class="dropdown-item" href="{{ path('tag_new') }}">New tag</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoryMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Category
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="categoryMenu">
+                        <a class="dropdown-item" href="{{ path('category_add') }}">New tag</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

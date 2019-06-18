@@ -1,17 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Blog - Add tag{% endblock %}
 
 {% block body %}
-
-    <h1>New Category! ✅</h1>
+    <h1>New Tag!</h1>
     <div class="row justify-content-center">
         <div class="col-7">
             {{ form_start(form) }}
-
                 {{ form_widget(form) }}
 
-                <button type="submit" class="btn btn-dark">Add Catogory</button>
+                <button type="submit" class="btn btn-dark">Add Tag</button>
 
             {{ form_end(form) }}
         </div>

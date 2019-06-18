@@ -1,0 +1,11 @@
+@import "_navbar";
+@import "_table";
+
+body {
+  background-color: #141414;
+  color: #FFFFFF;
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+}

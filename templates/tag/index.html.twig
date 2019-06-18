@@ -1,20 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TagController!{% endblock %}
+{% block title %}Tags List!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table table-dark">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+        {% for tag in tags %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ tag.name }}</td>
+                <td>{{ include('tag/_delete_form.html.twig') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/dremsis/workspace/quetes/php/symfony/blog/src/Controller/TagController.php'|file_link(0) }}">src/Controller/TagController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/dremsis/workspace/quetes/php/symfony/blog/templates/tag/index.html.twig'|file_link(0) }}">templates/tag/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="row justify-content-center"><a href="{{ path('tag_new') }}" class="btn btn-dark col-4">New tag</a></div>
+
 {% endblock %}
