@@ -11,6 +11,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class ArticleFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $slugify;
+
+    public function __construct(Slugify $slugify)
+    {
+        $this->slugify = $slugify;
+    }
+
     public function getDependencies()
     {
         return [CategoryFixtures::class];
@@ -22,10 +29,14 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
 
         for($i = 0; $i < 50; $i++) {
             $article = new Article();
-            $slugify = new Slugify();
             $article->setTitle(mb_strtolower($faker->sentence()));
             $article->setContent($faker->text(200));
-            $article->setSlug($slugify->generate($article->getTitle()));
+            $article->setSlug($this->slugify->generate($article->getTitle()));
+            if ($i % 2 === 0) {
+                $article->setAuthor($this->getReference('author'));
+            } else {
+                $article->setAuthor($this->getReference('admin'));
+            }
             $manager->persist($article);
             $article->setCategory($this->getReference('categorie_' . rand(0, 7)));
         }

@@ -29,8 +29,7 @@ class Mailer
             ->setBody($this->twig->render(
                 'article/mailer/mail.html.twig',
                 [
-                    'title' => $article->getTitle(),
-                    'content' => $article->getContent()
+                    'article' => $article
                 ]
             ),
             'text/html');

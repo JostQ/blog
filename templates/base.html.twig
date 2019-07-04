@@ -10,6 +10,7 @@
     <body>
         {{ include('_navbar.html.twig') }}
         <div class="container">
+            {{ include('_menu.html.twig') }}
             {% block body %}{% endblock %}
         </div>
         {% block javascripts %}
