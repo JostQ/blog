@@ -4,19 +4,28 @@
 {% block title %}All articles{% endblock %}
 
 {% block body %}
-<h1>All articles from article s table : </h1>
-{% for article in articles %}
-    <div>
-        <h2>{{ loop.index }} / {{ article.title }} - Category : {{ article.category.name }}</h2>
-        <p>{{ article.content }}</p>
+    <h1>All articles from article s table : </h1>
+    <div class="row justify-content-around">
+        {% for article in articles %}
+            <div class="card bg-dark mt-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ loop.index }} / {{ article.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Category : {{ article.category.name }}</h6>
+                    <p class="card-text">{{ article.content }}</p>
+                    <a href="{{ path('blog_show', { 'slug' : article.slug}) }}" class="card-link">Show</a>
+                    {% if is_granted('ROLE_AUTHOR') %}
+                        <a href="{{ path('article_edit', { 'id': article.id} ) }}">Edit</a>
+                    {%endif%}
+                </div>
+            </div>
+        {% else %}
+            Aucun article trouvé.
+        {% endfor %}
     </div>
-    <a href="{{ path('blog_show', { 'slug' : article.url}) }}">Show</a>
-{% else %}
-    Aucun article trouvé.
-{% endfor %}
-<a href="{{ path('app_index') }}">
-    Back to homepage.
-</a>
+
+    <a href="{{ path('app_index') }}">
+        Back to homepage.
+    </a>
 
 
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class BlogController
  * @package App\Controller
  * @Route("/blog", name="blog_")
+ * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY")
  */
 class BlogController extends AbstractController
 {
@@ -31,7 +33,7 @@ class BlogController extends AbstractController
             $article->url = preg_replace('/ /', '-', strtolower($article->getTitle()));
         }
 
-        return $this->render('blog/add.html.twig', ['articles' => $articles]);
+        return $this->render('blog/index.html.twig', ['articles' => $articles]);
     }
 
 

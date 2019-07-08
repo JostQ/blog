@@ -7,6 +7,7 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Service\Mailer;
 use App\Service\Slugify;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/article")
+ * @IsGranted("ROLE_AUTHOR")
  */
 class ArticleController extends AbstractController
 {
     /**
      * @Route("/", name="article_index", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_ANONIMOUSLY")
      */
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -69,6 +72,10 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article, Slugify $slugify): Response
     {
+        dd($this->getUser()->getRoles());
+        if ($article->getAuthor() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
