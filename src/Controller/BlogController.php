@@ -20,7 +20,7 @@ class BlogController extends AbstractController
      */
     public function index()
     {
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findAllWithCategoriesAndTags();
 
         if (!$articles) {
             throw $this->createNotFoundException(
