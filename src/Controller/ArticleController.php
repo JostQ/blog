@@ -21,7 +21,6 @@ class ArticleController extends AbstractController
 {
     /**
      * @Route("/", name="article_index", methods={"GET"})
-     * @IsGranted("IS_AUTHENTICATED_ANONIMOUSLY")
      */
     public function index(ArticleRepository $articleRepository): Response
     {
