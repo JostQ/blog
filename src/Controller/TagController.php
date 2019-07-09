@@ -40,6 +40,9 @@ class TagController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($tag);
             $em->flush();
+
+            $this->addFlash('success', 'Tag added');
+
             return $this->redirectToRoute('tag_show', ['name' => $tag->getName()]);
         }
 
@@ -64,6 +67,9 @@ class TagController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($tag);
+
+            $this->addFlash('danger', 'Tag deleted');
+
             $entityManager->flush();
         }
 

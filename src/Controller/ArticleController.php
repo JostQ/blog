@@ -47,6 +47,8 @@ class ArticleController extends AbstractController
 
             $mailer->sendMail($article, 'jul.bousseau@gmail.com');
 
+            $this->addFlash('success', 'Article created');
+
             return $this->redirectToRoute('article_index');
         }
 
@@ -71,8 +73,7 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article, Slugify $slugify): Response
     {
-        dd($this->getUser()->getRoles());
-        if ($article->getAuthor() !== $this->getUser()) {
+        if ($this->getUser()->getRoles() && $article->getAuthor() !== $this->getUser()) {
             throw $this->createAccessDeniedException();
         }
         $form = $this->createForm(ArticleType::class, $article);
@@ -81,6 +82,9 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setSlug($slugify->generate($article->getTitle()));
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Article edited');
+
 
             return $this->redirectToRoute('article_index', [
                 'id' => $article->getId(),
@@ -102,6 +106,8 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();
+
+            $this->addFlash('danger', 'Article deleted');
         }
 
         return $this->redirectToRoute('article_index');
