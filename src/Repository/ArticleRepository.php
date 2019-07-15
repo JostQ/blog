@@ -24,6 +24,11 @@ class ArticleRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->innerJoin('a.category', 'c' )
             ->addSelect('c')
+            ->innerJoin('a.tags', 't')
+            ->addSelect('t')
+            ->innerJoin('a.author', 'auth')
+            ->addSelect('auth')
+            ->orderBy('a.id', 'ASC')
             ->getQuery();
 
         return $qb->execute();
@@ -36,33 +41,4 @@ class ArticleRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
-
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Article
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
